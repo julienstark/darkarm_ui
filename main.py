@@ -8,7 +8,7 @@ class Checkbar(tk.Frame):
         self.v = tk.IntVar()
         self.v.set(0)
         for val, servo in enumerate(picks):
-            var = tk.IntVar()
+            _var = tk.IntVar()
             chk = tk.Radiobutton(self,
                                  text=servo,
                                  indicatoron=0,
