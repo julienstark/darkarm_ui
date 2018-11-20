@@ -62,9 +62,9 @@ def main_window():
 
 def jog_windows():
 
-    root = tk.Tk()
+    jog_wdw = tk.Tk()
 
-    header = tk.Message(root, text="Jog Joint")
+    header = tk.Message(jog_wdw, text="Jog Joint")
 
     header.config(anchor='n',
                   font=("times", 24, "bold"),
@@ -72,16 +72,18 @@ def jog_windows():
 
     header.pack(side=tk.TOP)
 
-    lng = Checkbar(root, ['Servo 1', 'Servo 2', 'Servo 3', 'Servo 4'])
+    lng = Checkbar(jog_wdw, ['Servo 1', 'Servo 2', 'Servo 3', 'Servo 4', 'Servo 5', 'Servo 6'])
     lng.pack(fill=tk.X)
     lng.config(relief=tk.GROOVE, bd=2)
 
-    tree = ttk.Treeview(root)
+    tree = ttk.Treeview(jog_wdw)
 
     tree["columns"]=("value")
     tree.column("value", width=100)
     tree.heading("value", text="Measure")
 
+    tree.insert("" , 0, text="Angle 6",  values=("180"))
+    tree.insert("" , 0, text="Angle 5",  values=("180"))
     tree.insert("" , 0, text="Angle 4",  values=("180"))
     tree.insert("" , 0, text="Angle 3",  values=("180"))
     tree.insert("" , 0, text="Angle 2",  values=("180"))
@@ -89,7 +91,7 @@ def jog_windows():
 
     tree.pack(side=tk.LEFT, expand=False)
 
-    new_canvas = tk.Frame(root, relief=tk.RAISED, borderwidth=1)
+    new_canvas = tk.Frame(jog_wdw, relief=tk.RAISED, borderwidth=1)
     new_canvas.pack(fill=tk.BOTH, expand=True)
 
     jog_dir = tk.Message(new_canvas, text="Jog Direction", anchor='n',
@@ -115,19 +117,19 @@ def jog_windows():
     grip_canvas = tk.Frame(new_canvas)
     grip_canvas.pack(fill=tk.BOTH, expand=True)
 
-    tk.Button(grip_canvas, text='Open Grip', command=root.quit).pack(anchor="s", side=tk.LEFT, expand=True)
+    tk.Button(grip_canvas, text='Open Grip', command=jog_wdw.quit).pack(anchor="s", side=tk.LEFT, expand=True)
     tk.Button(grip_canvas, text='Close Grip').pack(anchor='s', side=tk.LEFT, expand=True)
 
     def allstates():
         print(lng.state())
 
-    tk.Button(root, text='Back', command=root.quit).pack(anchor="s", side=tk.RIGHT)
-    tk.Button(root, text='Stand By Position', command=allstates).pack(anchor='s', side=tk.RIGHT)
-    tk.Button(root, text='Go Home', command=allstates).pack(anchor='s', side=tk.RIGHT)
+    tk.Button(jog_wdw, text='Back', command=jog_wdw.quit).pack(anchor="s", side=tk.RIGHT)
+    tk.Button(jog_wdw, text='Stand By Position', command=allstates).pack(anchor='s', side=tk.RIGHT)
+    tk.Button(jog_wdw, text='Go Home', command=allstates).pack(anchor='s', side=tk.RIGHT)
 
-    tk.Message(root, text="IN STAND BY POSITION", anchor='s').pack(anchor='s', side=tk.LEFT)
+    tk.Message(jog_wdw, text="IN STAND BY POSITION", anchor='s').pack(anchor='s', side=tk.LEFT)
 
-    root.mainloop()
+    jog_wdw.mainloop()
 
 def jog_linear():
 
