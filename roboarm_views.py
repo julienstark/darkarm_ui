@@ -292,3 +292,85 @@ class JogLinearScreen(rau.Screen):
                   text="Close Grip").pack(anchor="s",
                                           side=tk.LEFT,
                                           expand=True)
+
+
+class TeachRecordScreen(rau.Screen):
+    """Screen displaying the teach record options for the
+    Robot Arm.
+
+    Attributes:
+        header_canvas: Canvas containing the screen title.
+        header_message: Message containing the screen title text.
+        servobar: Checkbar instance representing the servo tab bar.
+        tree_canvas: Canvas including the Tree widgets.
+        rot_tree: Tree instance representing the rotation measure array.
+        command_canvas: Canvas acting as the commands container.
+        button_canvas: Canvas containing the button objects.
+        play_button: Button object labeled with play.
+        pause_button: Button object labeled with pause.
+        record_button: Button object labeled with record.
+        clear_button: Button object labeled with clear.
+        grip_canvas: Canvas containing the grip button widgets.
+        gripper_open_button: Button object labeled with gripper open.
+        gripper_close_button: Button object labeled with gripper close.
+    """
+
+    def __init__(self, *args, **kwargs):
+        """Default TeachRecordScreen builder."""
+
+        rau.Screen.__init__(self, *args, **kwargs)
+
+        header_canvas = tk.Frame(self, relief=tk.RAISED, borderwidth=1)
+        header_canvas.pack(fill=tk.BOTH, pady=25)
+
+        header_message = tk.Message(header_canvas,
+                                    text="Teach Record",
+                                    width=200)
+        header_message.config(anchor='n',
+                              font=("times", 24, "bold"),
+                              pady=5)
+        header_message.pack(side=tk.TOP, expand=True)
+
+        tree_canvas = tk.Frame(self)
+        tree_canvas.pack(side=tk.LEFT)
+
+        rot_tree = ttk.Treeview(tree_canvas)
+        rot_tree["columns"]=("value")
+        rot_tree.column("value", width=100)
+        rot_tree.heading("value", text="Measure")
+
+        rot_tree.insert("", 0, text="Angle 6", values=("180"))
+        rot_tree.insert("", 0, text="Angle 5", values=("180"))
+        rot_tree.insert("", 0, text="Angle 4", values=("180"))
+        rot_tree.insert("", 0, text="Angle 3", values=("180"))
+        rot_tree.insert("", 0, text="Angle 2", values=("180"))
+        rot_tree.insert("", 0, text="Angle 1", values=("180"))
+
+        rot_tree.pack(side=tk.LEFT, expand=False)
+
+        command_canvas = tk.Frame(self)
+        command_canvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+
+        button_canvas = tk.Frame(command_canvas)
+        button_canvas.pack(fill=tk.BOTH, expand=True)
+
+        play_button = tk.Button(button_canvas, text="Play")
+        play_button.pack(side=tk.LEFT, expand=True)
+
+        pause_button = tk.Button(button_canvas, text="Pause")
+        pause_button.pack(side=tk.LEFT, expand=True)
+
+        record_button = tk.Button(button_canvas, text="Record")
+        record_button.pack(side=tk.LEFT, expand=True)
+
+        clear_button = tk.Button(button_canvas, text="Clear")
+        clear_button.pack(side=tk.LEFT, expand=True)
+
+        grip_canvas = tk.Frame(command_canvas)
+        grip_canvas.pack(fill=tk.BOTH, expand=True)
+
+        gripper_open_button = tk.Button(grip_canvas, text="Gripper Open")
+        gripper_open_button.pack(side=tk.LEFT, expand=True)
+
+        gripper_close_button = tk.Button(grip_canvas, text="Gripper Close")
+        gripper_close_button.pack(side=tk.LEFT, expand=True)
