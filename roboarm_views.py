@@ -374,3 +374,123 @@ class TeachRecordScreen(rau.Screen):
 
         gripper_close_button = tk.Button(grip_canvas, text="Gripper Close")
         gripper_close_button.pack(side=tk.LEFT, expand=True)
+
+
+class TeachPointScreen(rau.Screen):
+    """Screen displaying the teach points left and teach
+    options for the Robot Arm.
+
+    Attributes:
+        header_canvas: Canvas containing the screen title.
+        header_message: Message containing the screen title text.
+        servobar: Checkbar instance representing the servo tab bar.
+        tree_canvas: Canvas including the Tree widgets.
+        rot_tree: Tree instance representing the rotation measure array.
+        command_canvas: Canvas acting as the commands container.
+        button_canvas: Canvas containing the button objects.
+        play_button: Button object labeled with play.
+        pause_button: Button object labeled with pause.
+        record_button: Button object labeled with record.
+        clear_button: Button object labeled with clear.
+        points_canvas: Canvas containing the points widgets.
+        tot_points_canvas: Canvas containing the total points widgets.
+        tot_points_mess: Canvas containing the total points message.
+        tot_points_entry: Canvas containing the total points entry.
+        teach_points_canvas: Canvas containing the teach points widgets.
+        teach_points_mess: Canvas containing the teach points message.
+        teach_points_entry: Canvas containing the teach points entry.
+        remain_points_canvas: Canvas containing the remain points widgets.
+        remain_points_mess: Canvas containing the remain points message.
+        remain_points_entry: Canvas containing the remain points entry.
+        grip_canvas: Canvas containing the grip button widgets.
+        gripper_open_button: Button object labeled with gripper open.
+        gripper_close_button: Button object labeled with gripper close.
+    """
+
+    def __init__(self, *args, **kwargs):
+        """Default TeachRecordScreen builder."""
+
+        rau.Screen.__init__(self, *args, **kwargs)
+
+        header_canvas = tk.Frame(self, relief=tk.RAISED, borderwidth=1)
+        header_canvas.pack(fill=tk.BOTH, pady=25)
+
+        header_message = tk.Message(header_canvas,
+                                    text="Teach Points",
+                                    width=200)
+        header_message.config(anchor='n',
+                              font=("times", 24, "bold"),
+                              pady=5)
+        header_message.pack(side=tk.TOP, expand=True)
+
+        tree_canvas = tk.Frame(self)
+        tree_canvas.pack(side=tk.LEFT)
+
+        rot_tree = ttk.Treeview(tree_canvas)
+        rot_tree["columns"]=("value")
+        rot_tree.column("value", width=100)
+        rot_tree.heading("value", text="Measure")
+
+        rot_tree.insert("", 0, text="Angle 6", values=("180"))
+        rot_tree.insert("", 0, text="Angle 5", values=("180"))
+        rot_tree.insert("", 0, text="Angle 4", values=("180"))
+        rot_tree.insert("", 0, text="Angle 3", values=("180"))
+        rot_tree.insert("", 0, text="Angle 2", values=("180"))
+        rot_tree.insert("", 0, text="Angle 1", values=("180"))
+
+        rot_tree.pack(side=tk.LEFT, expand=False)
+
+        command_canvas = tk.Frame(self)
+        command_canvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+
+        button_canvas = tk.Frame(command_canvas)
+        button_canvas.pack(fill=tk.BOTH, expand=True)
+
+        play_button = tk.Button(button_canvas, text="Play")
+        play_button.pack(side=tk.LEFT, expand=True)
+
+        pause_button = tk.Button(button_canvas, text="Pause")
+        pause_button.pack(side=tk.LEFT, expand=True)
+
+        record_button = tk.Button(button_canvas, text="Record")
+        record_button.pack(side=tk.LEFT, expand=True)
+
+        clear_button = tk.Button(button_canvas, text="Clear")
+        clear_button.pack(side=tk.LEFT, expand=True)
+
+        points_canvas = tk.Frame(command_canvas)
+        points_canvas.pack(fill=tk.BOTH, expand=True)
+
+        tot_points_canvas = tk.Frame(points_canvas)
+        tot_points_canvas.pack(side=tk.LEFT, expand=True)
+        tot_points_mess = tk.Message(tot_points_canvas, text="Total Points")
+        tot_points_mess.pack(expand=True)
+        tot_points_entry = tk.Message(tot_points_canvas, text="100")
+        tot_points_entry.pack(expand=True)
+
+        teach_points_canvas = tk.Frame(points_canvas)
+        teach_points_canvas.pack(side=tk.LEFT, expand=True)
+        teach_points_mess = tk.Message(teach_points_canvas,
+                                       text="Taught Points",
+                                       width=100)
+        teach_points_mess.pack(expand=True)
+        teach_points_entry = tk.Message(teach_points_canvas, text="0")
+        teach_points_entry.pack(expand=True)
+
+        remain_points_canvas = tk.Frame(points_canvas)
+        remain_points_canvas.pack(side=tk.LEFT, expand=True)
+        remain_points_mess = tk.Message(remain_points_canvas,
+                                        text="Remain Points",
+                                        width=100)
+        remain_points_mess.pack(expand=True)
+        remain_points_entry = tk.Message(remain_points_canvas, text="100")
+        remain_points_entry.pack(expand=True)
+
+        grip_canvas = tk.Frame(command_canvas)
+        grip_canvas.pack(fill=tk.BOTH, expand=True)
+
+        gripper_open_button = tk.Button(grip_canvas, text="Gripper Open")
+        gripper_open_button.pack(side=tk.LEFT, expand=True)
+
+        gripper_close_button = tk.Button(grip_canvas, text="Gripper Close")
+        gripper_close_button.pack(side=tk.LEFT, expand=True)
