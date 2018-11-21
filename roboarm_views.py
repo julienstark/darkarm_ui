@@ -494,3 +494,101 @@ class TeachPointScreen(rau.Screen):
 
         gripper_close_button = tk.Button(grip_canvas, text="Gripper Close")
         gripper_close_button.pack(side=tk.LEFT, expand=True)
+
+
+class MainView(rau.Screen):
+    """The view manager class responsible for displaying and
+    controlling the different view flows in the UI.
+
+    Attributes:
+        screen1 = A InfoScreen instance for the screen 1.
+        screen2 = A JogJointScreen instance for the screen 2.
+        screen3 = A JogLinearScreen instance for the screen 3.
+        screen4 = A TeachRecordScreen instance for the screen 4.
+        screen5 = A TeachPointScreen instance for the screen 5.
+        button_canvas = Canvas including the buttons widgets.
+        container_canvas = Canvas containing the main view.
+        alerter_canvas = Canvas including the bottom messages.
+        line_canvas = Canvas used for line drawing.
+        screen1_button = Button widget linking to screen1.
+        screen2_button = Button widget linking to screen2.
+        screen3_button = Button widget linking to screen3.
+        screen4_button = Button widget linking to screen4.
+        screen5_button = Button widget linking to screen5.
+        sb_button = Button widget containing the standby label.
+        gohome_button = Button widget containing the gohome label.
+        quit_button = Button widget containing the quit label.
+        position_message = Message containing the arm position info.
+    """
+
+    def __init__(self, *args, **kwargs):
+        """Default MainView builder."""
+
+        tk.Frame.__init__(self, *args, **kwargs)
+
+        screen1 = InfoScreen(self)
+        screen2 = JogJointScreen(self)
+        screen3 = JogLinearScreen(self)
+        screen4 = TeachRecordScreen(self)
+        screen5 = TeachPointScreen(self)
+
+        button_canvas = tk.Frame(self)
+        container_canvas = tk.Frame(self)
+        button_canvas.pack(side="top", fill="x", expand=False)
+        container_canvas.pack(side="top", fill="both", expand=True)
+        alerter_canvas = tk.Frame(self)
+        alerter_canvas.pack(side="bottom")
+
+        line_canvas = tk.Canvas(alerter_canvas, width=100, height=20)
+        line_canvas.pack()
+
+        line_canvas.create_line(0, 20, 1100, 20)
+
+        screen1.place(in_=container_canvas, x=0, y=0, relwidth=1, relheight=1)
+        screen2.place(in_=container_canvas, x=0, y=0, relwidth=1, relheight=1)
+        screen3.place(in_=container_canvas, x=0, y=0, relwidth=1, relheight=1)
+        screen4.place(in_=container_canvas, x=0, y=0, relwidth=1, relheight=1)
+        screen5.place(in_=container_canvas, x=0, y=0, relwidth=1, relheight=1)
+
+        screen1_button = tk.Button(button_canvas,
+                                   text="Home",
+                                   command=screen1.lift)
+        screen2_button = tk.Button(button_canvas,
+                                   text="Jog Joint",
+                                   command=screen2.lift)
+        screen3_button = tk.Button(button_canvas,
+                                   text="Jog Linear",
+                                   command=screen3.lift)
+        screen4_button = tk.Button(button_canvas,
+                                   text="Teach Record",
+                                   command=screen4.lift)
+        screen5_button = tk.Button(button_canvas,
+                                   text="Teach Point",
+                                   command=screen5.lift)
+        sb_button = tk.Button(button_canvas,
+                              text="Standby Position")
+        gohome_button = tk.Button(button_canvas,
+                                  text="Go Home")
+        quit_button = tk.Button(button_canvas,
+                                text="Quit",
+                                command=self.quit)
+
+        screen1_button.pack(side="left")
+        screen2_button.pack(side="left")
+        screen3_button.pack(side="left")
+        screen4_button.pack(side="left")
+        screen5_button.pack(side="left")
+
+        sb_button.pack(side="right")
+        gohome_button.pack(side="right")
+        quit_button.pack(side="right")
+        
+        position_message = tk.Message(alerter_canvas,
+                                      text="STANDBY POSITION",
+                                      width="300",
+                                      pady="15")
+        position_message.pack(side="bottom",
+                              expand=True,
+                              fill=tk.BOTH)
+
+        screen1.show()
