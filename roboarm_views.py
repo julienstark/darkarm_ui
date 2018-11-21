@@ -579,9 +579,9 @@ class MainView(rau.Screen):
         screen4_button.pack(side="left")
         screen5_button.pack(side="left")
 
+        quit_button.pack(side="right")
         sb_button.pack(side="right")
         gohome_button.pack(side="right")
-        quit_button.pack(side="right")
         
         position_message = tk.Message(alerter_canvas,
                                       text="STANDBY POSITION",
