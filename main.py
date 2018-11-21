@@ -14,6 +14,9 @@ def main():
 
     root = tk.Tk()
 
+    root.title("Robot Arm Launcher")
+    root.iconbitmap("octagon.ico")
+
     main_view = rav.MainView(root)
     main_view.pack(side="top", fill="both", expand=True)
 
